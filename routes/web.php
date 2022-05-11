@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LivroController;
+use App\Http\Controllers\AutorController;
 use App\Http\Requests\StoreUpdateLivro;
 
 /*
@@ -26,3 +27,5 @@ Route::get('/livros/{id}', [LivroController::class, 'show'])->name('livros.show'
 Route::delete('/livros/{id}', [LivroController::class, 'destroy'])->name('livros.destroy');
 Route::get('/livros/edit/{id}', [LivroController::class, 'edit'])->name('livros.edit');
 Route::put('/livros/{id}', [LivroController::class, 'update'])->name('livros.update');
+
+Route::get('/autores', [AutorController::class, 'index'])->name('autores.index');
