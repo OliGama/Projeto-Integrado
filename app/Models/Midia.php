@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class autor extends Model
+class Midia extends Model
 {
     use HasFactory;
-    protected $fillable = ['nome', 'pais', 'ano_nasc', 'area'];
 
     public function livro(){
-        return $this->belongsToMany(Livro::class);
+        return $this->belongsTo(Livro::class);
     }
 }

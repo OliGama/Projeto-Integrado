@@ -3,61 +3,73 @@
 namespace App\Http\Controllers;
 use App\Models\Autor;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreUpdateAutor;
 
 class AutorController extends Controller
 {
     public function index(){
-        $autores= Autor::all();
-        return view('autores.index', compact('autores'));
+        $autors= Autor::orderBy('nome')->paginate(5);
+        return view('autores.index', compact('autors'));
     }
+
     public function create(){
         return view('autores.create');
     }
-    // public function store(StoreUpdateLivro $request){
-    //     Autor::create($request->all());
-    //     return redirect()->route('autor.index');
-    // }
-    // public function show($id){
-    //     $autor= Autor::find($id);
-    //     if(!$autor){
-    //         return redirect()
-    //                 ->route('autor.index')
-    //                 ->with('message', 'Autor não foi encontrado');
-    //     }
-    //     return view('autor.show', compact('autor'));
-    // }
-    // public function destroy($id){
-    //     $autor=Autor::find($id);
-    //     if(!$autor){
-    //         return redirect()
-    //                 ->route('autor.index')
-    //                 ->with('message', 'Autor não foi encontrado');
-    //     }
-    //     $autor->delete();
-    //     return redirect()
-    //                 ->route('autor.index')
-    //                 ->with('message', 'Autor deletado com sucesso');
-    // }
-    // public function edit($id){
-    //     $autor=Autor::find($id);
-    //     if(!$autor){
-    //         return redirect()
-    //                 ->route('autor.index')
-    //                 ->with('message', 'Autor não foi encontrado');
-    //     }
-    //     return view('livros.edit', compact('livro'));
-    // }
-    // public function update(StoreUpdateLivro $request, $id){
-    //     $autor=Autor::find($id);
-    //     if(!$autor){
-    //         return redirect()
-    //                 ->route('autor.index')
-    //                 ->with('message', 'Autor não foi encontrado');
-    //     }
-    //     $autor->update($request->all());
 
-    //     return redirect()
-    //                 ->route('autor.index')
-    //                 ->with('message', 'Autor editado');
-    // }
+    public function store(StoreUpdateAutor $request){
+        Autor::create($request->all());
+        return redirect()->route('autores.index');
+    }
+
+    public function show($id){
+        $autors= Autor::find($id);
+        if(!$autors){
+            return redirect()
+                     ->route('autores.index')
+                     ->with('message', 'Autor não foi encontrado');
+        }
+        return view('autores.show', compact('autors'));
+    }
+    public function destroy($id){
+        $autors=Autor::find($id);
+        if(!$autors){
+            return redirect()
+                    ->route('autores.index')
+                    ->with('message', 'Autor não foi encontrado');
+        }
+        $autors->delete();
+        return redirect()
+                    ->route('autores.index')
+                    ->with('message', 'Autor deletado com sucesso');
+    }
+    public function edit($id){
+        $autors=Autor::find($id);
+        if(!$autors){
+            return redirect()
+                    ->route('autores.index')
+                    ->with('message', 'Autor não foi encontrado');
+        }
+        return view('autores.edit', compact('autors'));
+    }
+    public function update(StoreUpdateAutor $request, $id){
+        $autors=Autor::find($id);
+        if(!$autors){
+            return redirect()
+                    ->route('autores.index')
+                    ->with('message', 'Autor não foi encontrado');
+        }
+        $autors->update($request->all());
+
+        return redirect()
+                    ->route('autores.index')
+                    ->with('message', 'Autor editado');
+    }
+    public function search(Request $request){
+        $filters= $request->except('_token');
+        $autors = Autor::where('nome', 'LIKE', "%$request->search%")
+                        ->orWhere('pais', 'LIKE', "$request->search%")
+                        ->paginate();
+
+        return view('autores.index', compact('autors', 'filters'));
+    }
 }

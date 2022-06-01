@@ -9,5 +9,21 @@ use Illuminate\Database\Eloquent\Model;
 class livro extends Model
 {
     use HasFactory;
-    protected $fillable = ['titulo', 'idioma', 'ano', 'isbn'];
+    protected $fillable = ['titulo', 'idioma', 'ano', 'isbn', 'capa', 'editora_id'];
+
+    public function midia(){
+        return $this->hasOne(Midia::class);
+    }
+
+    public function editora(){
+        return $this->belongsTo(Editora::class);
+    }
+
+    public function comentarios(){
+        return $this->hasMany(Comentario::class);
+    }
+
+    public function autores(){
+        return $this->hasMany(Autor::class);
+    }
 }
