@@ -5,9 +5,11 @@
     <li>ano: {{$livro->ano}}</li>
     <li>idioma: {{$livro->idioma}}</li>
     <li>Capa:<br><img src="{{url("storage/{$livro->capa}")}}" alt="{{$livro->titulo}}" style= "max-width: 100px"></li>
-    <li>MIDIA</li>
-    <li>Nome de midia: {{$midia->nome}}</li>
-    <li>Descricao de midia: {{$midia->descricao}}</li>
+    @if ($livro->midia)
+        <li>MIDIA</li>
+        <li>Nome de midia: {{$midia->nome}}</li>
+        <li>Descricao de midia: {{$midia->descricao}}</li>
+    @endif
 </ul>
 
 <form action="{{route ('livros.destroy', $livro->id)}}" method="post">

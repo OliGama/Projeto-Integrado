@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Midia;
 use Illuminate\Http\Request;
 
 class MidiaController extends Controller
@@ -34,7 +34,8 @@ class MidiaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Midia::create($request->all());
+        return redirect()->route('livros.index');
     }
 
     /**
