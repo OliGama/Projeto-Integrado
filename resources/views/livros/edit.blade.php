@@ -18,5 +18,12 @@
         <img src="{{url("storage/{$livro->capa}")}}" alt="{{$livro->titulo}}" style= "max-width: 100px">
         <p><button type="submit">Enviar</button> </p>
         <p><a href="{{route('livros.index')}}">Voltar para pagina inicial</a></p>
+        <p></p>
     </form>
+    {{-- <form action="{{route('midias.update', $livro->midia->id)}}" method="post">
+        <p>MIDIA</p>
+        <p>Nome da midia: <input type="text" name="nome" id="nome" value = "{{$livro->midia->nome}}"></p>
+        <p>Descricao: <input type="text" name="descricao" id="descricao" value = "{{$livro->midia->descricao}}"></p>
+        <p><button type="submit">Enviar</button> </p>
+    </form> --}}
 </div>

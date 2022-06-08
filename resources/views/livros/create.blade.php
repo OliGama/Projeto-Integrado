@@ -9,9 +9,9 @@
         <p>Capa: <input type="file" name="capa" id="capa"></p>
         <p><button type="submit">Enviar</button> </p>
     </form>
-    <form action="{{route('midias.store')}}" method="post">
+    {{-- <form action="{{route('midias.store')}}" method="post">
         <p>Midia: <input type="text" name="midia" id="midia" placeholder="Digite uma midia"></p>
         <p><button type="submit">Enviar</button> </p>
-    </form>
-    <p><a href="{{route('livros.index')}}">Voltar para pagina inicial</a></p>
+    </form> --}}
+    <p><a href="{{route('home')}}">Voltar para pagina inicial</a></p>
 </div>

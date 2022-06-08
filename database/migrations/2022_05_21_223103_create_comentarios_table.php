@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('comentarios', function (Blueprint $table) {
             $table->id();
-            $table->string('comentario');
+            $table->string ('comentario');
             $table->timestamps();
         });
     }

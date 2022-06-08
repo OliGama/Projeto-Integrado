@@ -7,8 +7,8 @@
     <li>Capa:<br><img src="{{url("storage/{$livro->capa}")}}" alt="{{$livro->titulo}}" style= "max-width: 100px"></li>
     @if ($livro->midia)
         <li>MIDIA</li>
-        <li>Nome de midia: {{$midia->nome}}</li>
-        <li>Descricao de midia: {{$midia->descricao}}</li>
+        <li>Nome de midia: {{$livro->midia->nome}}</li>
+        <li>Descricao de midia: {{$livro->midia->descricao}}</li>
     @endif
 </ul>
 
@@ -17,4 +17,4 @@
     <input type="hidden" name="_method" value="DELETE">
     <button type="submit">Deletar o livro {{$livro->titulo}}</button>
 </form>
-<p><a href="{{route('livros.index')}}">Voltar para pagina inicial</a></p>
+<p><a href="{{route('home')}}">Voltar para pagina inicial</a></p>

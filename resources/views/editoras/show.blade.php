@@ -4,7 +4,6 @@
     <li>Nome: {{$editoras->nome}}</li>
     <li>Local: {{$editoras->local}}</li>
     <li>Site: {{$editoras->site}}</li>
-    <li>Email: {{$editoras->email}}</li>
 </ul>
 
 <form action="{{route ('editoras.destroy', $editoras->id)}}" method="post">

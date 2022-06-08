@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LivroController;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AutorController;
 use App\Http\Controllers\EditoraController;
 use App\Http\Controllers\MidiaController;
@@ -23,7 +24,12 @@ use App\Http\Requests\StoreUpdateAutor;
 Route::get('/', function () {
     return view('welcome');
 });
-// Route Livros
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Route Livros
 Route::get('/livros', [LivroController::class, 'index'])->name('livros.index');
 Route::get('/livros/create', [LivroController::class, 'create'])->name('livros.create');
 Route::post('/livros', [LivroController::class, 'store'])->name('livros.store');
@@ -32,7 +38,7 @@ Route::delete('/livros/{id}', [LivroController::class, 'destroy'])->name('livros
 Route::get('/livros/edit/{id}', [LivroController::class, 'edit'])->name('livros.edit');
 Route::put('/livros/{id}', [LivroController::class, 'update'])->name('livros.update');
 Route::any('/livros/search', [LivroController::class, 'search'])->name('livros.search');
-// Route Autor
+//Route Autor
 Route::get('/autores', [AutorController::class, 'index'])->name('autores.index');
 Route::get('/autores/create', [AutorController::class, 'create'])->name('autores.create');
 Route::post('/autores', [AutorController::class, 'store'])->name('autores.store');
@@ -41,7 +47,7 @@ Route::delete('/autores/{id}', [AutorController::class, 'destroy'])->name('autor
 Route::get('/autores/edit/{id}', [AutorController::class, 'edit'])->name('autores.edit');
 Route::put('/autores/{id}', [AutorController::class, 'update'])->name('autores.update');
 Route::any('/autores/search', [AutorController::class, 'search'])->name('autores.search');
-// Route Editora
+//Route Editora
 Route::get('/editoras', [EditoraController::class, 'index'])->name('editoras.index');
 Route::get('/editoras/create', [EditoraController::class, 'create'])->name('editoras.create');
 Route::post('/editoras', [EditoraController::class, 'store'])->name('editoras.store');
@@ -50,5 +56,5 @@ Route::delete('/editoras/{id}', [EditoraController::class, 'destroy'])->name('ed
 Route::get('/editoras/edit/{id}', [EditoraController::class, 'edit'])->name('editoras.edit');
 Route::put('/editoras/{id}', [EditoraController::class, 'update'])->name('editoras.update');
 Route::any('/editoras/search', [EditoraController::class, 'search'])->name('editoras.search');
-// Route Midia
+//Route Midia
 Route::resource('midias', MidiaController::class);
