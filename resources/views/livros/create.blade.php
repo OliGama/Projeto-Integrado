@@ -7,6 +7,12 @@
         <p>Idioma: <input type="text" name="idioma" id="idioma" placeholder="Digite um idioma" value = "{{old('idioma')}}"></p>
         <p>ISBN: <input type="text" name="isbn" id="isbn" placeholder="Digite ISBN" value = "{{old('isbn')}}"></p>
         <p>Capa: <input type="file" name="capa" id="capa"></p>
+        <p>Editora: </p>
+        <select name="editora_id" id="editora_id">
+            @foreach ($editoras as $editora)
+            <option value="{{ $editora->nome }}">{{ $editora->nome }}</option>
+            @endforeach
+        </select>
         <p><button type="submit">Enviar</button> </p>
     </form>
     {{-- <form action="{{route('midias.store')}}" method="post">
@@ -15,3 +21,13 @@
     </form> --}}
     <p><a href="{{route('home')}}">Voltar para pagina inicial</a></p>
 </div>
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif

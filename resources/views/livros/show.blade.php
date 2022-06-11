@@ -5,6 +5,7 @@
     <li>ano: {{$livro->ano}}</li>
     <li>idioma: {{$livro->idioma}}</li>
     <li>Capa:<br><img src="{{url("storage/{$livro->capa}")}}" alt="{{$livro->titulo}}" style= "max-width: 100px"></li>
+    <li>Editora: {{$livro->editora->nome}}</li>
     @if ($livro->midia)
         <li>MIDIA</li>
         <li>Nome de midia: {{$livro->midia->nome}}</li>
