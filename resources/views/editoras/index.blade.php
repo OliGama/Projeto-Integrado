@@ -32,3 +32,5 @@
 @else
     {{$editoras -> links() }}
 @endif
+
+<p><a href="{{route('home')}}">Voltar para pagina inicial</a></p>

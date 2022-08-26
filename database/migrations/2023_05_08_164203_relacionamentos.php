@@ -22,11 +22,11 @@ return new class extends Migration
         Schema::table('comentarios', function (Blueprint $table) {
             $table->foreignId ('livro_id')->constrained('livros');
         });
-        // Schema::create('livros_autores', function(Blueprint $table){
-        //     $table->id();
-        //     $table->foreignId ('livros_id')->constrained('livros');
-        //     $table->foreignId ('autores_id')->constrained('autores');
-        // });
+        Schema::create('livros_autores', function(Blueprint $table){
+            $table->id();
+            $table->foreignId ('livros_id')->constrained('livros');
+            $table->foreignId ('autores_id')->constrained('autors');
+        });
     }
 
     /**

@@ -16,9 +16,14 @@
         <p>ISBN: <input type="text" name="isbn" id="isbn" placeholder="Digite ISBN" value = "{{$livro->isbn}}"></p>
         <p>Editar capa: <input type="file" name="capa" id="capa" value="{{$livro->capa}}"></p>
         <img src="{{url("storage/{$livro->capa}")}}" alt="{{$livro->titulo}}" style= "max-width: 100px">
+        <p>Editora: <select name="editora_id" id="editora_id">
+            @foreach ($editoras as $editora)
+            <option value="{{ $editora->nome }}">{{ $editora->nome }}</option>
+            @endforeach
+        </select></p>
+
         <p><button type="submit">Enviar</button> </p>
         <p><a href="{{route('livros.index')}}">Voltar para pagina inicial</a></p>
-        <p></p>
     </form>
     {{-- <form action="{{route('midias.update', $livro->midia->id)}}" method="post">
         <p>MIDIA</p>

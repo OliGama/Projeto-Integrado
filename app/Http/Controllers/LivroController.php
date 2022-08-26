@@ -17,14 +17,15 @@ class LivroController extends Controller
     }
 
     public function create(){
-        return view('livros.create');
+        $editoras = Editora::all();
+        return view ('livros.create', compact('editoras'));
     }
 
     public function store(StoreUpdateLivro $request){
         $data = $request->all();
         if($request->capa->isValid()){
             $nameFile= Str::of($request->isbn)->slug('-')
-            .'-'. $request->capa->getClientOriginalExtension();
+            .'.'. $request->capa->getClientOriginalExtension();
             $imagem=$request->capa->storeAs('livro', $nameFile);
             $data ['capa'] = $imagem;
             $tmp = Editora::where('nome', '=', $request->editora_id)->get();
@@ -76,7 +77,8 @@ class LivroController extends Controller
                     ->route('livros.index')
                     ->with('message', 'Livro não foi encontrado');
         }
-        return view('livros.edit', compact('livro'));
+        $editoras = Editora::all();
+        return view('livros.edit', compact('livro', 'editoras'));
     }
 
     public function update(StoreUpdateLivro $request, $id){
@@ -92,9 +94,12 @@ class LivroController extends Controller
                 Storage::delete($livro->capa);
             }
             $nameFile= Str::of($request->isbn)->slug('-')
-            .'-'. $request->capa->getClientOriginalExtension();
+            .'.'. $request->capa->getClientOriginalExtension();
             $imagem= $request->capa->storeAs('livro', $nameFile);
             $data ['capa'] = $imagem;
+            $tmp = Editora::where('nome', '=', $request->editora_id)->get();
+            $editora= $tmp->first();
+            $data['editora_id']= $editora->id;
             $livro->update($data);
             return redirect()
                         ->route('livros.index')
